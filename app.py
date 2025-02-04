@@ -37,6 +37,19 @@ def start_grapher():
         lblGraphTen = tk.Label(graphwindow, text = "-")
         lblGraphZero = tk.Label(graphwindow, text = "-")
 
+        lblGraphOne.grid(row = 0, column = 0)
+        lblGraphTwo.grid(row = 1, column = 0)
+        lblGraphThree.grid(row = 2, column = 0)
+        lblGraphFour.grid(row = 3, column = 0)
+        lblGraphFive.grid(row = 4, column = 0)
+        lblGraphSix.grid(row = 5, column = 0)
+        lblGraphSeven.grid(row = 6, column = 0)
+        lblGraphEight.grid(row = 7, column = 0)
+        lblGraphNine.grid(row = 8, column = 0)
+        lblGraphTen.grid(row = 9, column = 0)
+        lblGraphZero.grid(row = 10, column = 0)
+        graphCanvas.grid(row = 0, column = 1, rowspan = 11)
+
         def draw_lines():
             graphCanvas.create_line(0,42, 550,42, width = 2)
             graphCanvas.create_line(0,81, 550,81, width = 2)
@@ -49,6 +62,7 @@ def start_grapher():
             graphCanvas.create_line(0,353, 550,353, width = 2)
         
         
+        draw_lines()
         unit = max(num1, num2, num3, num4)
         unit = unit/10
                 
@@ -80,10 +94,71 @@ def start_grapher():
         graphCanvas.create_rectangle(425, 550, 500, 390 - num4, fill = "purple")
     
     def clear():
-        
+        global graphup, graphwindow
+        if graphup:
+            graphwindow.destroy()
+        tbxOne.delete(0, tk.END)
+        tbxTwo.delete(0, tk.END)
+        tbxThree.delete(0, tk.END)
+        tbxFour.delete(0, tk.END)
 
     tk.Button(grapher, text = "Graph", font = ("Arial", 14), command = graph, bg = "#12ba02").grid(row = 4, column = 0)
-    tk.Button(grapher, text = "Clear", font = ("Arial", 14), command = clear, bg = "#12ba02").gird(row = 4, column = 1)
+    tk.Button(grapher, text = "Clear", font = ("Arial", 14), command = clear, bg = "#12ba02").grid(row = 4, column = 1)
+    tk.Label(grapher, text = "Number 1:", font = ("Arial", 12)).grid(row = 0, column = 0)
+    tk.Label(grapher, text = "Number 2:", font = ("Arial", 12)).grid(row = 1, column = 0)
+    tk.Label(grapher, text = "Number 3:", font = ("Arial", 12)).grid(row = 2, column = 0)
+    tk.Label(grapher, text = "Number 4:", font = ("Arial", 12)).grid(row = 3, column = 0)
+    tbxOne.grid(row = 0, column = 1)
+    tbxTwo.grid(row = 1, column = 1)
+    tbxThree.grid(row = 2, column = 1)
+    tbxFour.grid(row = 3, column = 1)
+def start_calculator():
+    calcwindow = tk.Toplevel(root)
+    calcwindow.geometry("500x500")
+    calcwindow.configure(bg = "#0000ff")
+    calcwindow.title("calculator")
+    calcwindow.resizable(False, False)
+
+
+    tk.Label(calcwindow, text = "Calculator", font = ("Arial", 20)).grid(row = 0, column = 0)
+    tk.Label(calcwindow, text = "First number:", font = ("Arial", 14)).grid(row = 1, column = 0)
+    tk.Label(calcwindow, text = "Second number:", font = ("Arial", 14)).grid(row = 2, column = 0)
+    tk.Label(calcwindow, text = "Operation:", font = ("Arial", 14)).grid(row = 3, column = 0)
+    tbxFirstNum = tk.Entry(calcwindow)
+    tbxSecondNum = tk.Entry(calcwindow)
+
+    options = [
+        "Addition",
+        "Subtraction",
+        "Multiplication",
+        "Division"
+    ]
+
+    operation = tk.StringVar()
+    operation.set("Addition")
+    menuOperation = tk.OptionMenu(calcwindow, operation, *options)
+
+    def calculate():
+        num1 = tbxFirstNum.get()
+        num2 = tbxSecondNum.get()
+        operation = menuOperation.get()
+        try:
+            if operation == "Addition":
+                answer = int(num1) + int(num2)
+            elif operation == "Subtraction":
+                answer = int(num1) + int(num2)
+            elif operation == "Multiplication":
+                answer = int(num1) * int(num2)
+            elif operation == "Division":
+                answer = float(num1)/float(num2)
+            messagebox.showinfo("Calculation complete!", "Your answer is: " + str(answer))
+
+        except ValueError:
+            btnCalc.config(text = "Invalid Input")
+    
+    btnCalc = tk.Button(calcwindow, text = "Calculate", font = ("Arial",14), command = calculate)
+    btnCalc.grid(row = 4, column = 0)
+    menuOperation.grid(row = 3, column = 0)
 
 
 #ROOT ATTRIBUTES#
