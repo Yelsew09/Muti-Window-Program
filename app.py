@@ -1,11 +1,12 @@
 #IMPORTS#
+from os import times
 import tkinter as tk
 from tkinter import messagebox
 
 def start_grapher():
     global root
     grapher = tk.Toplevel(root)
-    grapher.geometry("300x300")
+    grapher.geometry("210x140")
     grapher.resizable(False, False)
     grapher.title("grapher")
     grapher.configure(bg = "#085c00")
@@ -13,17 +14,19 @@ def start_grapher():
     tbxTwo = tk.Entry(grapher)
     tbxThree = tk.Entry(grapher)
     tbxFour = tk.Entry(grapher)
-    num1 = int(tbxOne.get())
-    num2 = int(tbxTwo.get())
-    num3 = int(tbxThree.get())
-    num4 = int(tbxFour.get())
 
     def graph():
-        global num1, num2, num3, num4
+        global graphup, graphwindow
+        graphup = True
+        num1 = int(tbxOne.get())
+        num2 = int(tbxTwo.get())
+        num3 = int(tbxThree.get())
+        num4 = int(tbxFour.get())
         graphwindow = tk.Toplevel(grapher)
-        graphwindow.geometry("600, 400")
+        graphwindow.geometry("585x425")
         graphCanvas = tk.Canvas(graphwindow, width = "550", height = "390", bg = "blue")
-        graphwindow.resizable(True, False)
+        graphwindow.maxsize(700, 425)
+        graphwindow.minsize(585, 425)
         
         lblGraphOne = tk.Label(graphwindow, text = "-")
         lblGraphTwo = tk.Label(graphwindow, text = "-")
@@ -48,7 +51,7 @@ def start_grapher():
         lblGraphNine.grid(row = 8, column = 0)
         lblGraphTen.grid(row = 9, column = 0)
         lblGraphZero.grid(row = 10, column = 0)
-        graphCanvas.grid(row = 0, column = 1, rowspan = 11)
+        graphCanvas.grid(row = 0, column = 1, rowspan = 11, pady = 15)
 
         def draw_lines():
             graphCanvas.create_line(0,42, 550,42, width = 2)
@@ -61,11 +64,9 @@ def start_grapher():
             graphCanvas.create_line(0,314, 550,314, width = 2)
             graphCanvas.create_line(0,353, 550,353, width = 2)
         
-        
         draw_lines()
         unit = max(num1, num2, num3, num4)
         unit = unit/10
-                
         #Updating labels to show units
         lblGraphOne.config(text = str(round(unit*10,1)))
         lblGraphTwo.config(text = str(round(unit*9,1)))
@@ -102,12 +103,12 @@ def start_grapher():
         tbxThree.delete(0, tk.END)
         tbxFour.delete(0, tk.END)
 
-    tk.Button(grapher, text = "Graph", font = ("Arial", 14), command = graph, bg = "#12ba02").grid(row = 4, column = 0)
-    tk.Button(grapher, text = "Clear", font = ("Arial", 14), command = clear, bg = "#12ba02").grid(row = 4, column = 1)
-    tk.Label(grapher, text = "Number 1:", font = ("Arial", 12)).grid(row = 0, column = 0)
-    tk.Label(grapher, text = "Number 2:", font = ("Arial", 12)).grid(row = 1, column = 0)
-    tk.Label(grapher, text = "Number 3:", font = ("Arial", 12)).grid(row = 2, column = 0)
-    tk.Label(grapher, text = "Number 4:", font = ("Arial", 12)).grid(row = 3, column = 0)
+    tk.Button(grapher, text = "Graph", font = ("Arial", 12), command = graph, bg = "#12ba02").grid(row = 4, column = 0)
+    tk.Button(grapher, text = "Clear", font = ("Arial", 12), command = clear, bg = "#12ba02").grid(row = 4, column = 1)
+    tk.Label(grapher, text = "Number 1:", font = ("Arial", 12), bg = "#085c00").grid(row = 0, column = 0)
+    tk.Label(grapher, text = "Number 2:", font = ("Arial", 12), bg = "#085c00").grid(row = 1, column = 0)
+    tk.Label(grapher, text = "Number 3:", font = ("Arial", 12), bg = "#085c00").grid(row = 2, column = 0)
+    tk.Label(grapher, text = "Number 4:", font = ("Arial", 12), bg = "#085c00").grid(row = 3, column = 0)
     tbxOne.grid(row = 0, column = 1)
     tbxTwo.grid(row = 1, column = 1)
     tbxThree.grid(row = 2, column = 1)
