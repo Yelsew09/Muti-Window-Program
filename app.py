@@ -1,5 +1,5 @@
 #IMPORTS#
-from os import times
+import time
 import tkinter as tk
 from tkinter import messagebox
 
@@ -114,17 +114,17 @@ def start_grapher():
     tbxThree.grid(row = 2, column = 1)
     tbxFour.grid(row = 3, column = 1)
 def start_calculator():
+    global operation
     calcwindow = tk.Toplevel(root)
-    calcwindow.geometry("500x500")
-    calcwindow.configure(bg = "#0000ff")
+    calcwindow.geometry("275x125")
+    calcwindow.configure(bg = "blue")
     calcwindow.title("calculator")
     calcwindow.resizable(False, False)
 
 
-    tk.Label(calcwindow, text = "Calculator", font = ("Arial", 20)).grid(row = 0, column = 0)
-    tk.Label(calcwindow, text = "First number:", font = ("Arial", 14)).grid(row = 1, column = 0)
-    tk.Label(calcwindow, text = "Second number:", font = ("Arial", 14)).grid(row = 2, column = 0)
-    tk.Label(calcwindow, text = "Operation:", font = ("Arial", 14)).grid(row = 3, column = 0)
+    tk.Label(calcwindow, text = "First number:", font = ("Arial", 14), bg = "blue").grid(row = 0, column = 0)
+    tk.Label(calcwindow, text = "Second number:", font = ("Arial", 14), bg = "blue").grid(row = 1, column = 0)
+    tk.Label(calcwindow, text = "Operation:", font = ("Arial", 14), bg = "blue").grid(row = 2, column = 0)
     tbxFirstNum = tk.Entry(calcwindow)
     tbxSecondNum = tk.Entry(calcwindow)
 
@@ -138,28 +138,34 @@ def start_calculator():
     operation = tk.StringVar()
     operation.set("Addition")
     menuOperation = tk.OptionMenu(calcwindow, operation, *options)
+    menuOperation.config(bg = "blue")
 
     def calculate():
+        global operation
         num1 = tbxFirstNum.get()
         num2 = tbxSecondNum.get()
-        operation = menuOperation.get()
+        operational = operation.get()
         try:
-            if operation == "Addition":
+            if operational == "Addition":
                 answer = int(num1) + int(num2)
-            elif operation == "Subtraction":
-                answer = int(num1) + int(num2)
-            elif operation == "Multiplication":
+            elif operational == "Subtraction":
+                answer = int(num1) - int(num2)
+            elif operational == "Multiplication":
                 answer = int(num1) * int(num2)
-            elif operation == "Division":
-                answer = float(num1)/float(num2)
-            messagebox.showinfo("Calculation complete!", "Your answer is: " + str(answer))
+            elif operational == "Division":
+                answer = float(num1)/float(num2)    
+            calcwindow.destroy()
+            messagebox.showinfo("calc_complete", "Your answer is: " + str(answer))
 
         except ValueError:
             btnCalc.config(text = "Invalid Input")
-    
-    btnCalc = tk.Button(calcwindow, text = "Calculate", font = ("Arial",14), command = calculate)
-    btnCalc.grid(row = 4, column = 0)
-    menuOperation.grid(row = 3, column = 0)
+
+
+    btnCalc = tk.Button(calcwindow, text = "Calculate", font = ("Arial",12), command = calculate, bg = "blue")
+    btnCalc.grid(row = 3, column = 0)
+    menuOperation.grid(row = 2, column = 0)
+    tbxFirstNum.grid(row = 0, column = 1)
+    tbxSecondNum.grid(row = 1, column = 1)
 
 
 #ROOT ATTRIBUTES#
