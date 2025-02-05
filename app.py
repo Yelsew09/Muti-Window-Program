@@ -1,5 +1,4 @@
 #IMPORTS#
-import time
 import tkinter as tk
 from tkinter import messagebox
 
@@ -153,7 +152,7 @@ def start_calculator():
             elif operational == "Multiplication":
                 answer = int(num1) * int(num2)
             elif operational == "Division":
-                answer = float(num1)/float(num2)    
+                answer = float(num1)/float(num2)
             calcwindow.destroy()
             messagebox.showinfo("calc_complete", "Your answer is: " + str(answer))
 
@@ -172,7 +171,7 @@ def start_calculator():
 root = tk.Tk()
 root.geometry("500x500")
 root.title("multi-window_app")
-root.configure(bg = "#ff1100")
+root.config(bg = "#ff1100")
 root.resizable(False, False)
 
 #ROOT ELEMENTS#
