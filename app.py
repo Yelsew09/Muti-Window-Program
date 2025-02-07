@@ -6,9 +6,11 @@ def start_grapher():
     global root
     grapher = tk.Toplevel(root)
     grapher.geometry("210x140")
+    grapher.iconbitmap("images/graph.ico")
     grapher.resizable(False, False)
     grapher.title("grapher")
     grapher.configure(bg = "#085c00")
+    
     tbxOne = tk.Entry(grapher)
     tbxTwo = tk.Entry(grapher)
     tbxThree = tk.Entry(grapher)
@@ -23,6 +25,7 @@ def start_grapher():
         num4 = int(tbxFour.get())
         graphwindow = tk.Toplevel(grapher)
         graphwindow.geometry("585x425")
+        graphwindow.iconbitmap("images/graph.ico")
         graphCanvas = tk.Canvas(graphwindow, width = "550", height = "390", bg = "blue")
         graphwindow.maxsize(700, 425)
         graphwindow.minsize(585, 425)
@@ -117,6 +120,7 @@ def start_calculator():
     calcwindow = tk.Toplevel(root)
     calcwindow.geometry("275x125")
     calcwindow.configure(bg = "blue")
+    calcwindow.iconbitmap("images/calculator-logo.ico")
     calcwindow.title("calculator")
     calcwindow.resizable(False, False)
 
@@ -171,6 +175,7 @@ def start_calculator():
 root = tk.Tk()
 root.geometry("500x500")
 root.title("multi-window_app")
+root.iconbitmap("images/windows_11_icon.ico")
 root.config(bg = "#ff1100")
 root.resizable(False, False)
 
